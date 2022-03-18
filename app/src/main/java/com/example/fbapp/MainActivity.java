@@ -27,12 +27,7 @@ ActivityMainBinding binding;
         PostAdapter adapter = new PostAdapter();
         binding.RV.setLayoutManager(new LinearLayoutManager(this));
         binding.RV.setAdapter(adapter);
-        postViewModel.postsMutableliveData.observe(this, new Observer<List<PostModel>>() {
-            @Override
-            public void onChanged(List<PostModel> postModels) {
-                adapter.setPosts(postModels);
-            }
-        });
+        postViewModel.postsMutableliveData.observe(this,(Observer) (postModels) ->{ adapter.setPosts((List<PostModel>) postModels);} );
 
     }
 }

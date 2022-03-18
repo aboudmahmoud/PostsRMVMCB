@@ -4,8 +4,11 @@ import com.example.fbapp.pojo.PostModel;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Observable;
 import retrofit2.Call;
 import retrofit2.Retrofit;
+
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PostsClient {
@@ -16,7 +19,9 @@ public class PostsClient {
     public PostsClient()
     {
         Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl)
-                .addConverterFactory(GsonConverterFactory.create()).build();
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+                .build();
         postInterFace=retrofit.create(PostInterFace.class);
     }
 
@@ -28,7 +33,7 @@ public class PostsClient {
         return getInstane;
     }
 
-    public Call<List<PostModel>> getPosts()
+    public Observable<List<PostModel>> getPosts()
     {
         return postInterFace.getposts();
     }
