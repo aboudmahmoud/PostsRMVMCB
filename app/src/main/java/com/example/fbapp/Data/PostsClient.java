@@ -5,6 +5,7 @@ import com.example.fbapp.pojo.PostModel;
 import java.util.List;
 
 import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Single;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 
@@ -33,7 +34,7 @@ public class PostsClient {
         return getInstane;
     }
 
-    public Observable<List<PostModel>> getPosts()
+    public Single<List<PostModel>> getPosts()
     {
         return postInterFace.getposts();
     }

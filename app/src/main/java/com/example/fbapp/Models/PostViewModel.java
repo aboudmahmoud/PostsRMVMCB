@@ -15,6 +15,7 @@ import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.core.Scheduler;
+import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.disposables.Disposable;
 
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -27,11 +28,15 @@ public class PostViewModel extends ViewModel {
 String TAG="aboud";
     public void getPosts()
     {
-       Observable<List<PostModel>> observable =PostsClient.getGetInstane().getPosts().
+   /*    Observable<List<PostModel>> observable =PostsClient.getGetInstane().getPosts().
+                subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        observable.subscribe(o->postsMutableliveData.setValue(o)
+                ,error-> Log.d("aboud", "Erroris: " +error.getMessage()));*/
+
+        Single<List<PostModel>> observable =PostsClient.getGetInstane().getPosts().
                 subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
         observable.subscribe(o->postsMutableliveData.setValue(o)
                 ,error-> Log.d("aboud", "Erroris: " +error.getMessage()));
-
 
         //one way
        /* Observer observer = new Observer() {
